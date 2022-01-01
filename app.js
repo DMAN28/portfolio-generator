@@ -1,7 +1,7 @@
-//const fs = require('fs');
+const fs = require('fs');
 const inquirer = require('inquirer');
 console.log(inquirer)
-//const generatePage = require ('./src/page-template.js');
+const generatePage = require ('./src/page-template.js');
 
 const promptUser = () => {
   return inquirer.prompt([
@@ -115,11 +115,18 @@ if (!portfolioData.projects) {
     });
   };
 
-promptUser()
-.then(promptProject)
-.then(portfolioData => {
-  console.log(portfolioData);
-});
+  promptUser()
+  .then(promptProject)
+  .then(portfolioData => {
+    const pageHTML = generatePage(portfolioData);
+
+    // fs.writeFile('./index.html', pageHTML, err => {
+    //   if (err) throw new Error(err);
+
+    //   console.log('Page created! Check out index.html in this directory to see it!');
+    // });
+  });
+
 //const profileDataArgs = process.argv.slice(2);
 // const pageHTML = generatePage(name, github);
 //   fs.writeFile('index.html', generatePage(name, github), err => {
